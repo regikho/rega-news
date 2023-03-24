@@ -7,6 +7,8 @@ const pageSize = 8;
 let totalResults = 0;
 let lastQueryType = '';
 
+const API_KEY = 'd22014f7b6ef49f18d095302d23105ab';
+
 function createNewsItem(text, src, imgSrc) {
     const newArticle = document.createElement('div');
     newArticle.classList.add("article-item");
@@ -23,10 +25,10 @@ async function getData(searchValue, pageSize, page) {
     let url = '';
 
     if (searchValue) {
-        url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(searchValue)}&pageSize=${pageSize}&page=${page}&language=ru&sortBy=publishedAt&apiKey=d22014f7b6ef49f18d095302d23105ab`;
+        url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(searchValue)}&pageSize=${pageSize}&page=${page}&language=ru&sortBy=publishedAt&apiKey=${API_KEY}`;
         lastQueryType = 'everything';
     } else {
-        url = `https://newsapi.org/v2/top-headlines?pageSize=${pageSize}&page=${page}&language=ru&sortBy=publishedAt&apiKey=d22014f7b6ef49f18d095302d23105ab`;
+        url = `https://newsapi.org/v2/top-headlines?pageSize=${pageSize}&page=${page}&language=ru&sortBy=publishedAt&apiKey=${API_KEY}`;
         lastQueryType = 'top';
     }
 
@@ -55,8 +57,6 @@ const getTop = function (data) {
         page = 1;
     }
 
-    console.log(lastQueryType);
-
     lastQueryType = 'top';
 
     for (let i = 0; i < pageSize; i++) {
@@ -79,9 +79,6 @@ const getSearch = function(data) {
         page = 1;
     }
     
-    console.log(lastQueryType);
-    console.log(page);
-
     lastQueryType = 'everything';
 
     if (totalResults !== 0) {
@@ -100,8 +97,6 @@ const getSearch = function(data) {
 
         createNewsItem(title, link, imgLink);
     }
-
-    console.log(news);
 }
 
 document.querySelector('.search').addEventListener('submit', (e) => {
