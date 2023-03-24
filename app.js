@@ -70,12 +70,11 @@ const getTop = function (data) {
 
 // Пугачева
 const getSearch = function(data) {
-    // sectionArticals.innerHTML = '';
+    sectionArticals.innerHTML = '';
     const news = data.articles;
     const headingTop = document.querySelector('.heading-top');
 
     if (lastQueryType === 'top') {
-        // sectionArticals.innerHTML = '';
         page = 1;
     }
     
@@ -88,7 +87,7 @@ const getSearch = function(data) {
         sectionArticals.innerHTML = `<img src="./img/no-result.svg" class="img_no-result">`;
     }
 
-    // getTop(data);
+    getTop(data);
 
     for (let i = 0; i < pageSize; i++) {
         const title = news[i].title;
